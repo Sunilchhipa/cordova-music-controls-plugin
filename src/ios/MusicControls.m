@@ -47,6 +47,11 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:playbackRate forKey:MPNowPlayingInfoPropertyPlaybackRate];
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
+        if (![musicControlsInfo isPlaying]) {
+            nowPlayingInfoCenter.playbackState = MPMusicPlaybackStatePaused;
+        } else {
+            nowPlayingInfoCenter.playbackState = MPMusicPlaybackStatePlaying;
+        }
     }];
 
     [self registerMusicControlsEventListener];
