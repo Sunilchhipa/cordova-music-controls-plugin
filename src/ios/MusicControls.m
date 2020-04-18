@@ -47,9 +47,9 @@ MusicControlsInfo * musicControlsSettings;
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
         if (![musicControlsInfo isPlaying]) {
-            nowPlayingCenter.playbackState = MPMusicPlaybackStatePaused;
+            nowPlayingInfoCenter.playbackState = MPMusicPlaybackStatePaused;
         } else {
-            nowPlayingCenter.playbackState = MPMusicPlaybackStatePlaying;
+            nowPlayingInfoCenter.playbackState = MPMusicPlaybackStatePlaying;
         }
     }];
 
