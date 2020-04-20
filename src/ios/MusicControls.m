@@ -45,9 +45,9 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
         [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
         if (![musicControlsInfo isPlaying]) {
-            [updatedNowPlayingInfo setObject:0 forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         } else {
-            [updatedNowPlayingInfo setObject:1 forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
