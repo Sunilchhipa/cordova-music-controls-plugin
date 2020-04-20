@@ -31,8 +31,8 @@ MusicControlsInfo * musicControlsSettings;
         NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
         
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
-        NSNumber * duration = [NSNumber numberWithInt:[musicControlsInfo duration]];
-        NSNumber * elapsed = [NSNumber numberWithInt:[musicControlsInfo elapsed]];
+        NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
+        NSNumber * elapsed = [NSNumber numberWithUnsignedInteger:[musicControlsInfo elapsed]];
         NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
 
         if (mediaItemArtwork != nil) {
@@ -70,13 +70,13 @@ MusicControlsInfo * musicControlsSettings;
     NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingCenter.nowPlayingInfo];
     
     [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-    [updatedNowPlayingInfo setObject:playbackRate forKey:MPNowPlayingInfoPropertyPlaybackRate];
-    nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
+
     if (![musicControlsInfo isPlaying]) {
-        nowPlayingCenter.playbackState = MPMusicPlaybackStatePaused;
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     } else {
-        nowPlayingCenter.playbackState = MPMusicPlaybackStatePlaying;
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }
+    nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }
 
 // this was performing the full function of updateIsPlaying and just adding elapsed time update as well
