@@ -30,6 +30,15 @@ MusicControlsInfo * musicControlsSettings;
         NSDictionary * nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo;
         NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
         AVAudioSession * session = [AVAudioSession sharedInstance];
+
+        // Play music even in background and dont stop playing music
+        // even another app starts playing sound
+        [session setCategory:AVAudioSessionCategoryPlayback
+                       withOptions:AVAudioSessionCategoryOptionMixWithOthers
+                       error:NULL];
+
+        [session setCategory:AVAudioSessionCategoryAmbient
+                       error:NULL];
         
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
         NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
@@ -67,6 +76,14 @@ MusicControlsInfo * musicControlsSettings;
     NSNumber * elapsed = [NSNumber numberWithDouble:[musicControlsInfo elapsed]];
     NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
     AVAudioSession * session = [AVAudioSession sharedInstance];
+    // Play music even in background and dont stop playing music
+    // even another app starts playing sound
+    [session setCategory:AVAudioSessionCategoryPlayback
+                   withOptions:AVAudioSessionCategoryOptionMixWithOthers
+                   error:NULL];
+
+    [session setCategory:AVAudioSessionCategoryAmbient
+                   error:NULL];
     
     if (!NSClassFromString(@"MPNowPlayingInfoCenter")) {
         return;
