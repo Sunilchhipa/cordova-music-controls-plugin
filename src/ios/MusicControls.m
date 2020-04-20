@@ -29,6 +29,7 @@ MusicControlsInfo * musicControlsSettings;
         MPNowPlayingInfoCenter * nowPlayingInfoCenter =  [MPNowPlayingInfoCenter defaultCenter];
         NSDictionary * nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo;
         NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
+        AVAudioSession * session = [AVAudioSession sharedInstance];
         
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
         NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
@@ -46,8 +47,12 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
         if (![musicControlsInfo isPlaying]) {
             [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            // De-Activate the audio session
+            [session setActive:NO error:NULL];
         } else {
             [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            // Activate the audio session
+            [session setActive:YES error:NULL];
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
@@ -61,6 +66,7 @@ MusicControlsInfo * musicControlsSettings;
     MusicControlsInfo * musicControlsInfo = [[MusicControlsInfo alloc] initWithDictionary:musicControlsInfoDict];
     NSNumber * elapsed = [NSNumber numberWithDouble:[musicControlsInfo elapsed]];
     NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
+    AVAudioSession * session = [AVAudioSession sharedInstance];
     
     if (!NSClassFromString(@"MPNowPlayingInfoCenter")) {
         return;
@@ -73,8 +79,12 @@ MusicControlsInfo * musicControlsSettings;
 
     if (![musicControlsInfo isPlaying]) {
         [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        // De-Activate the audio session
+        [session setActive:NO error:NULL];
     } else {
         [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        // Activate the audio session
+        [session setActive:YES error:NULL];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }
