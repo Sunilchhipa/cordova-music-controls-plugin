@@ -34,12 +34,7 @@ MusicControlsInfo * musicControlsSettings;
         NSNumber * duration = [NSNumber numberWithInt:[musicControlsInfo duration]];
         NSNumber * elapsed = [NSNumber numberWithInt:[musicControlsInfo elapsed]];
         NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
-        if (![musicControlsInfo isPlaying]) {
-            playbackRate = 0;
-        } else {
-            playbackRate = 1;
-        }
-        
+
         if (mediaItemArtwork != nil) {
             [updatedNowPlayingInfo setObject:mediaItemArtwork forKey:MPMediaItemPropertyArtwork];
         }
@@ -49,7 +44,11 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:[musicControlsInfo album] forKey:MPMediaItemPropertyAlbumTitle];
         [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
         [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-        [updatedNowPlayingInfo setObject:playbackRate forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        if (![musicControlsInfo isPlaying]) {
+            [updatedNowPlayingInfo setObject:0 forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        } else {
+            [updatedNowPlayingInfo setObject:1 forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
     }];
