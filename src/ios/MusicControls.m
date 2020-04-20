@@ -33,10 +33,11 @@ MusicControlsInfo * musicControlsSettings;
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
         NSNumber * duration = [NSNumber numberWithInt:[musicControlsInfo duration]];
         NSNumber * elapsed = [NSNumber numberWithInt:[musicControlsInfo elapsed]];
+        NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
         if (![musicControlsInfo isPlaying]) {
-            NSNumber * playbackRate = 0;
+            playbackRate = 0;
         } else {
-            NSNumber * playbackRate = 1;
+            playbackRate = 1;
         }
         
         if (mediaItemArtwork != nil) {
