@@ -45,10 +45,10 @@ MusicControlsInfo * musicControlsSettings;
     [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
     if ([musicControlsInfo isPlaying]) {
         //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     } else {
         //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }
 
     nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
@@ -73,10 +73,10 @@ MusicControlsInfo * musicControlsSettings;
 
     if ([musicControlsInfo isPlaying]) {
         //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     } else {
         //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }
@@ -222,10 +222,12 @@ MusicControlsInfo * musicControlsSettings;
                 
             case UIEventSubtypeRemoteControlPlay:
                 action = @"music-controls-play";
+                [audioPlayer play];
                 break;
                 
             case UIEventSubtypeRemoteControlPause:
                 action = @"music-controls-pause";
+                [audioPlayer pause];
                 break;
                 
             case UIEventSubtypeRemoteControlPreviousTrack:
