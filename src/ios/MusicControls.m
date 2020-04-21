@@ -29,16 +29,6 @@ MusicControlsInfo * musicControlsSettings;
         MPNowPlayingInfoCenter * nowPlayingInfoCenter =  [MPNowPlayingInfoCenter defaultCenter];
         NSDictionary * nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo;
         NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
-        AVAudioSession * session = [AVAudioSession sharedInstance];
-
-        // Play music even in background and dont stop playing music
-        // even another app starts playing sound
-        [session setCategory:AVAudioSessionCategoryPlayback
-                       withOptions:AVAudioSessionCategoryOptionMixWithOthers
-                       error:NULL];
-
-        [session setCategory:AVAudioSessionCategoryAmbient
-                       error:NULL];
         
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
         NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
@@ -58,12 +48,10 @@ MusicControlsInfo * musicControlsSettings;
             [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // De-Activate the audio session
-            //[session setActive:NO error:NULL];
         } else {
             [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // Activate the audio session
-            //[session setActive:YES error:NULL];
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
@@ -77,15 +65,6 @@ MusicControlsInfo * musicControlsSettings;
     MusicControlsInfo * musicControlsInfo = [[MusicControlsInfo alloc] initWithDictionary:musicControlsInfoDict];
     NSNumber * elapsed = [NSNumber numberWithDouble:[musicControlsInfo elapsed]];
     NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
-    AVAudioSession * session = [AVAudioSession sharedInstance];
-    // Play music even in background and dont stop playing music
-    // even another app starts playing sound
-    [session setCategory:AVAudioSessionCategoryPlayback
-                   withOptions:AVAudioSessionCategoryOptionMixWithOthers
-                   error:NULL];
-
-    [session setCategory:AVAudioSessionCategoryAmbient
-                   error:NULL];
     
     if (!NSClassFromString(@"MPNowPlayingInfoCenter")) {
         return;
@@ -100,12 +79,10 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // De-Activate the audio session
-        //[session setActive:NO error:NULL];
     } else {
         [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // Activate the audio session
-        //[session setActive:YES error:NULL];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }

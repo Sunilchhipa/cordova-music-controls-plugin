@@ -13,7 +13,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
 #import <MediaPlayer/MPMediaItem.h>
-#import <AVFoundation/AVFoundation.h>
 
 @interface MusicControls : CDVPlugin {}
 
