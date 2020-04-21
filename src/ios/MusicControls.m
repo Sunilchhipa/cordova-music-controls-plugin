@@ -58,12 +58,12 @@ MusicControlsInfo * musicControlsSettings;
             [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // De-Activate the audio session
-            [session setActive:NO error:NULL];
+            //[session setActive:NO error:NULL];
         } else {
             [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // Activate the audio session
-            [session setActive:YES error:NULL];
+            //[session setActive:YES error:NULL];
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
@@ -100,12 +100,12 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // De-Activate the audio session
-        [session setActive:NO error:NULL];
+        //[session setActive:NO error:NULL];
     } else {
         [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // Activate the audio session
-        [session setActive:YES error:NULL];
+        //[session setActive:YES error:NULL];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }
