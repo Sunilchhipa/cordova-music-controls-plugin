@@ -44,14 +44,12 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:[musicControlsInfo album] forKey:MPMediaItemPropertyAlbumTitle];
         [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
         [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-        if (![musicControlsInfo isPlaying]) {
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            // De-Activate the audio session
+        if ([musicControlsInfo isPlaying]) {
+            //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         } else {
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            // Activate the audio session
+            //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
@@ -75,14 +73,12 @@ MusicControlsInfo * musicControlsSettings;
     
     [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
 
-    if (![musicControlsInfo isPlaying]) {
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        // De-Activate the audio session
+    if ([musicControlsInfo isPlaying]) {
+        //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     } else {
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        // Activate the audio session
+        //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 }
