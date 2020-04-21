@@ -59,7 +59,7 @@ MusicControlsInfo * musicControlsSettings;
 - (void) updateIsPlaying: (CDVInvokedUrlCommand *) command {
     NSDictionary * musicControlsInfoDict = [command.arguments objectAtIndex:0];
     MusicControlsInfo * musicControlsInfo = [[MusicControlsInfo alloc] initWithDictionary:musicControlsInfoDict];
-    NSNumber * elapsed = [NSNumber numberWithUnsignedInteger:[musicControlsInfo elapsed]];
+    NSNumber * elapsed = [NSNumber numberWithInt:[musicControlsInfo elapsed]];
     NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
     
     if (!NSClassFromString(@"MPNowPlayingInfoCenter")) {
