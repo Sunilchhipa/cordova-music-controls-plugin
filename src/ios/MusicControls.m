@@ -79,6 +79,11 @@ MusicControlsInfo * musicControlsSettings;
         //[updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
+    if (![musicControlsInfo isPlaying]) {
+        nowPlayingCenter.playbackState = MPMusicPlaybackStatePaused;
+    } else {
+        nowPlayingCenter.playbackState = MPMusicPlaybackStatePlaying;
+    }
 }
 
 // this was performing the full function of updateIsPlaying and just adding elapsed time update as well
