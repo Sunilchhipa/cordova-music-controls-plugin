@@ -55,11 +55,13 @@ MusicControlsInfo * musicControlsSettings;
         [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
         [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
         if (![musicControlsInfo isPlaying]) {
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // De-Activate the audio session
             [session setActive:NO error:NULL];
         } else {
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+            //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
             // Activate the audio session
             [session setActive:YES error:NULL];
         }
@@ -95,11 +97,13 @@ MusicControlsInfo * musicControlsSettings;
     [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
 
     if (![musicControlsInfo isPlaying]) {
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        //[updatedNowPlayingInfo setObject:[NSNumber Double:0.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // De-Activate the audio session
         [session setActive:NO error:NULL];
     } else {
-        [updatedNowPlayingInfo setObject:[NSNumber numberWithInt:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        //[updatedNowPlayingInfo setObject:[NSNumber Double:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
         // Activate the audio session
         [session setActive:YES error:NULL];
     }
