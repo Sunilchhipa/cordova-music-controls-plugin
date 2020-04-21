@@ -25,35 +25,33 @@ MusicControlsInfo * musicControlsSettings;
         return;
     }
     
-    [self.commandDelegate runInBackground:^{
-        MPNowPlayingInfoCenter * nowPlayingInfoCenter =  [MPNowPlayingInfoCenter defaultCenter];
-        NSDictionary * nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo;
-        NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
-        
-        MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
-        NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
-        NSNumber * elapsed = [NSNumber numberWithUnsignedInteger:[musicControlsInfo elapsed]];
-        NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
+    MPNowPlayingInfoCenter * nowPlayingInfoCenter =  [MPNowPlayingInfoCenter defaultCenter];
+    NSDictionary * nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo;
+    NSMutableDictionary * updatedNowPlayingInfo = [NSMutableDictionary dictionaryWithDictionary:nowPlayingInfo];
 
-        if (mediaItemArtwork != nil) {
-            [updatedNowPlayingInfo setObject:mediaItemArtwork forKey:MPMediaItemPropertyArtwork];
-        }
-        
-        [updatedNowPlayingInfo setObject:[musicControlsInfo artist] forKey:MPMediaItemPropertyArtist];
-        [updatedNowPlayingInfo setObject:[musicControlsInfo track] forKey:MPMediaItemPropertyTitle];
-        [updatedNowPlayingInfo setObject:[musicControlsInfo album] forKey:MPMediaItemPropertyAlbumTitle];
-        [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
-        [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-        if ([musicControlsInfo isPlaying]) {
-            //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        } else {
-            //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-            [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-        }
-        
-        nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
-    }];
+    MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
+    NSNumber * duration = [NSNumber numberWithUnsignedInteger:[musicControlsInfo duration]];
+    NSNumber * elapsed = [NSNumber numberWithUnsignedInteger:[musicControlsInfo elapsed]];
+    NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
+
+    if (mediaItemArtwork != nil) {
+        [updatedNowPlayingInfo setObject:mediaItemArtwork forKey:MPMediaItemPropertyArtwork];
+    }
+
+    [updatedNowPlayingInfo setObject:[musicControlsInfo artist] forKey:MPMediaItemPropertyArtist];
+    [updatedNowPlayingInfo setObject:[musicControlsInfo track] forKey:MPMediaItemPropertyTitle];
+    [updatedNowPlayingInfo setObject:[musicControlsInfo album] forKey:MPMediaItemPropertyAlbumTitle];
+    [updatedNowPlayingInfo setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
+    [updatedNowPlayingInfo setObject:elapsed forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+    if ([musicControlsInfo isPlaying]) {
+        //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:1.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:1] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+    } else {
+        //[updatedNowPlayingInfo setObject:[NSNumber numberWithFloat:0.0f] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [updatedNowPlayingInfo setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+    }
+
+    nowPlayingInfoCenter.nowPlayingInfo = updatedNowPlayingInfo;
 
     [self registerMusicControlsEventListener];
 }
